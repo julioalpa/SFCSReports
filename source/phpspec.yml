@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: SFCSReports
+        psr4_prefix: SFCSReports
+        src_path: app

@@ -1,0 +1,11 @@
+{
+    "name": "nwsn/sfcsreports",
+    "description": "Reports from traceability software",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Julio Sanchez",
+            "email": "julio.sanchez@newsan.com.ar"
+        }
+    ]
+}
