@@ -1,14 +1,38 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <p class="navbar-text navbar-right"><a href="#" class="navbar-link"><img src="http://localhost:8000/materialize-css/images/logo.png"></a></p>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Desplegar navegación</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="http://localhost:8000/images/logo.png"></a>
         </div>
-        <div class="nav navbar-nav navbar-right">
+
+
+        <ul class="nav navbar-nav navbar-right">
             @if($currentUser)
-                <p> Usuario: {{ $currentUser->name }} <a href="{{ route('auth_destroy_path') }}">Salir</a> </p>
+                <li><span class="glyphicon glyphicon-user"></span> Usuario: {{ $currentUser->name }}</li>
+                <li><a href="{{ route('auth_destroy_path') }}"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
             @else
-                <p><a href="{{ route('auth_show_path') }}">Login</a></p>
+                <li><a href="{{ route('auth_show_path') }}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
             @endif
-        </div>
+        </ul>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <ul class="nav nav-pills nav-justified">
+            @if($currentUser)
+                @if ($currentUser->is('admin'))
+                    <li><a href="{{ route('home_show_path') }}">Home</a></li>
+                    <li><a href="{{ route('monitores_show_path') }}">Monitores</a></li>
+                    <li><a href="{{ route('grafico_show_path') }}">Gráficos</a></li>
+                    <li><a href="{{ route('historico_show_path') }}">Histórico</a></li>
+                @endif
+            @endif
+        </ul>
+
     </div>
 </nav>

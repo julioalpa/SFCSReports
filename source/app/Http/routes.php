@@ -22,6 +22,24 @@ Route::group(['middleware' => 'auth'] , function (){
         'uses' => 'HomeController@store',
         'as' => 'home_store_path'
     ]);
+
+    Route::get('/monitor', [
+        'uses' => 'MonitoresController@index',
+        'middleware' => 'role:admin',
+        'as' => 'monitores_show_path'
+    ]);
+
+    Route::get('/grafico', [
+        'uses' => 'GraficosController@index',
+        'middleware' => 'role:admin',
+        'as' => 'grafico_show_path'
+    ]);
+
+    Route::get('/historico', [
+        'uses' => 'HistoricoController@index',
+        'middleware' => 'role:admin',
+        'as' => 'historico_show_path'
+    ]);
 });
 
 Route::get('auth/login', [

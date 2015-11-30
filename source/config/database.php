@@ -85,6 +85,16 @@ return [
             'prefix'   => '',
         ],
 
+        'sfc' => [
+            'driver'   => 'sqlsrv',
+            'host'     => env('SFC_HOST', 'localhost'),
+            'database' => env('SFC_DATABASE', 'forge'),
+            'username' => env('SFC_USERNAME', 'forge'),
+            'password' => env('SFC_PASSWORD', ''),
+            'charset'  => 'utf8',
+            'prefix'   => '',
+        ],
+
     ],
 
     /*
