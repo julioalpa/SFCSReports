@@ -13,7 +13,10 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     var bootstrapPath = 'node_modules/bootstrap-sass/assets';
+    var bootstrapSelectPath = 'node_modules/bootstrap-select';
+
     mix.sass('app.scss')
         .copy(bootstrapPath + '/fonts', 'public/fonts')
-        .copy(bootstrapPath + '/javascripts/bootstrap.min.js', 'public/js');
+        .copy(bootstrapPath + '/javascripts/bootstrap.min.js', 'public/js')
+        .copy(bootstrapSelectPath + '/js/bootstrap-select.js', 'public/js');
 });
