@@ -7,7 +7,7 @@
 @section('content')
     @include('partials.errors')
 
-    @if(isset($config))
+    @if(isset($plantas))
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Modelo</h3>
@@ -24,9 +24,7 @@
         </div>
     </div>
         @else
-        <div class="jumbotron text-center">
-            <h1><-- Configurar!</h1>
-        </div>
+            @include('partials.monitorconfig')
     @endif
 
 

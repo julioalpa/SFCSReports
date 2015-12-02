@@ -151,6 +151,10 @@ return [
          */
         Bican\Roles\RolesServiceProvider::class,
 
+        /*
+         * Styde HTML Service Providers...
+         */
+        Styde\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -199,7 +203,5 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-
     ],
-
 ];

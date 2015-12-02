@@ -29,6 +29,12 @@ Route::group(['middleware' => 'auth'] , function (){
         'as' => 'monitores_show_path'
     ]);
 
+    Route::post('/monitor', [
+        'uses' => 'MonitoresController@store',
+        'middleware' => 'role:admin',
+        'as' => 'monitores_store_path'
+    ]);
+
     Route::get('/grafico', [
         'uses' => 'GraficosController@index',
         'middleware' => 'role:admin',
@@ -55,4 +61,9 @@ Route::post('auth/login', [
 Route::get('auth/logout', [
     'uses' => 'AuthController@destroy',
     'as'   => 'auth_destroy_path'
+]);
+
+Route::get('linea/dropdown/{id}', [
+    'uses' => 'LineaController@dropdownByPlanta',
+    'as' => 'dropTest'
 ]);

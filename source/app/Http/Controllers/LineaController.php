@@ -3,11 +3,14 @@
 namespace SFCSReports\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 use SFCSReports\Http\Requests;
-use SFCSReports\Http\Controllers\Controller;
+use SFCSReports\Linea;
+use SFCSReports\Planta;
 
-class MonitoresController extends Controller
+
+class LineaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +19,7 @@ class MonitoresController extends Controller
      */
     public function index()
     {
-        return view('pages.monitor');
+        //
     }
 
     /**
@@ -26,7 +29,7 @@ class MonitoresController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -37,9 +40,7 @@ class MonitoresController extends Controller
      */
     public function store(Request $request)
     {
-        $config = 'test';
-
-        return view('pages.monitor', ['config' => $config]);
+        //
     }
 
     /**
@@ -85,5 +86,20 @@ class MonitoresController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function dropdownByPlanta()
+    {
+        $input = Input::get('option');
+
+        $planta = Planta::where(
+            ['Id' => 2]
+        )->get();
+
+        $lineas = Linea::where(
+            ['Planta_id' => $planta->first()->Id]
+        )->get()->lists('Id','Nombre');
+
+        return Response::make($lineas);
     }
 }
