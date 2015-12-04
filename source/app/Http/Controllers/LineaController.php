@@ -88,17 +88,17 @@ class LineaController extends Controller
         //
     }
 
-    public function dropdownByPlanta()
+    public function dropdownByPlanta($id)
     {
         $input = Input::get('option');
 
         $planta = Planta::where(
-            ['Id' => 2]
+            ['Id' => $id]
         )->get();
 
         $lineas = Linea::where(
             ['Planta_id' => $planta->first()->Id]
-        )->get()->lists('Id','Nombre');
+        )->get();
 
         return Response::make($lineas);
     }

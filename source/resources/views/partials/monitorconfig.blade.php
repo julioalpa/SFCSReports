@@ -1,58 +1,66 @@
 
-{{--<div class="page-header">
-    <h1>Configurar Vistas <small>Completar los datos</small> </h1>
-
-    <form action="{{ route('monitores_show_path')  }}" method="post">
-        {{ csrf_field() }}
-
-        {!! Form::open([]) !!}
-
-        <?php $plantas = \SFCSReports\Planta::all();?>
-
-        {!! Form::select('Planta', $plantas->lists('Nombre','Id')) !!}
-
-        {!! Form::close() !!}
-    </form>
-</div>
-
 <div class="container-fluid">
     <div class="row">
         <div class="container col-md-4 col-md-offset-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">Configuración</div>
                 <div class="panel-body">
                     {!! Form::open() !!}
-                    {!! Field::text('name') !!}
-                    {!! Field::email('email', ['class' => 'email-field-class' ]) !!}
-                    {!! Field::password('password') !!}
-                    {!! Field::password('password_confirmation') !!}
-                    {!! Form::submit('Send', ['class' => 'btn btn-success']) !!}
+                        <?php $plantas = \SFCSReports\Planta::all();?>
+
+                    <div class="form-group">
+                        {!! Form::select('planta', $plantas->lists('Nombre','Id'),'', [
+                            'class' => 'form-control',
+                            'placeholder' => 'Seleccione una planta..'
+                            ]) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::select('linea',[],'', [
+                            'class' => 'form-control',
+                            'disabled' => 'disabled'
+                            ]) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::number('target','', [
+                            'class' => 'form-control',
+                            'disabled' => 'disabled'
+                            ]) !!}
+                    </div>
+
+                    {!! Form::submit('Iniciar', ['class' => 'btn btn-success']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
-{!! Form::open() !!}
-{!! Field::select('contact_names_value') !!}
 
-<script>
-    $('#contact_names_value').select2({
-        placeholder: 'Search contacts',
-        minimumInputLength: 3,
-        ajax: {
-            url: '/linea/dropdown/2',
-            dataType: 'json',
-            data: function (term, page) {
-                return {
-                    contact_names_value: term
-                };
-            },
-            results: function (data, page) {
-                return {results: data};
-            }
-        },
-        tags: true
+{{--Cargando las LINEAS desde las Plantas--}}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('select[name=planta]').change(function () {
+            var id_planta = $(this).val();
+
+            // $('select[name=cidade]').html('').append('<option value="">  Carregando...  </option>');
+            $.get('/linea/dropdown/' + id_planta, function (lineas) {
+                $('select[name=linea]').empty();
+                $('select[name=linea]').prop('disabled', false);
+                $('select[name=linea]').append('<option value=' + null + '> Seleccione una linea.. </option>');
+
+                $.each(lineas, function (key, value) {
+                    $('select[name=linea]').append('<option value=' + value.Id + '>' + value.Nombre + '</option>');
+                });
+            });
+        });
+
+        $('.linea').change(function () {
+            $('.target').prop('disabled', false);
+        });
     });
+
 </script>
+
