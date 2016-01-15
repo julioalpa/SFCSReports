@@ -14,4 +14,9 @@ class Linea extends Model
     {
         return $this->belongsTo('SFCSReports\Planta','Planta_id');
     }
+
+    public function ConfigLinea()
+    {
+        return $this->hasMany('SFCSReports\ConfigLinea','Linea_id');
+    }
 }

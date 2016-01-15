@@ -19,10 +19,10 @@
             <ul class="nav nav-pills nav-justified">
                 @if($currentUser)
                     @if ($currentUser->is('admin'))
-                        <li><a href="{{ route('home_show_path') }}">Home</a></li>
-                        <li><a href="{{ route('monitores_show_path') }}">Monitores</a></li>
-                        <li><a href="{{ route('grafico_show_path') }}">Gráficos</a></li>
-                        <li><a href="{{ route('historico_show_path') }}">Histórico</a></li>
+                        <li><a href="{{ route('home_show_path') }}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="{{ route('monitores_show_path') }}"><span class="glyphicon glyphicon-stats"></span> Monitores</a></li>
+                        <li><a href="{{ route('grafico_show_path') }}"><span class="glyphicon glyphicon-signal"></span> Gráficos</a></li>
+                        <li><a href="{{ route('historico_show_path') }}"><span class="glyphicon glyphicon-search"></span> Histórico</a></li>
                     @endif
                 @endif
             </ul>

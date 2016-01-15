@@ -3,14 +3,13 @@
 namespace SFCSReports\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+
 use Illuminate\Support\Facades\Response;
 use SFCSReports\Http\Requests;
-use SFCSReports\Linea;
-use SFCSReports\Planta;
+use SFCSReports\Http\Controllers\Controller;
+use SFCSReports\TrazabilidadMotorola;
 
-
-class LineaController extends Controller
+class TrazabilidadMotorolaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -89,15 +88,39 @@ class LineaController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $hr
+     * @param $lineaId
      * @return mixed
      */
-    public function dropdownByPlanta($id)
+    public function getProductionByLine($hr, $lineaId)
     {
-        $lineas = Linea::where(
-            ['Planta_id' => $id]
-        )->get();
+        $dateBegin = date('Y-m-d');
+        $dateEnd = date('Y-m-d');
 
-        return Response::make($lineas);
+        if ($hr < 15)
+        {
+            $dateBegin .= " 06:00:00";
+            $dateEnd .= " 14:59:59";
+        }
+        else
+        {
+            $dateBegin .= " 15:00:01";
+            $dateEnd .= " 23:59:59";
+        }
+
+        $TrazabilidadByLine = TrazabilidadMotorola::selectRaw('COUNT(TrazabilidadMotorola.Codigo) as Total, Modelo.Nombre')
+            ->where([
+                'Linea.Id' => $lineaId,
+                'CodigoPuesto.Newsan' => true
+            ])
+            ->whereBetween('TrazabilidadMotorola.FechaHora',array($dateBegin, $dateEnd))
+            ->join('ConfigLinea','ConfigLinea.Id','=','TrazabilidadMotorola.ConfigLinea_id')
+            ->join('Modelo','Modelo.Id','=','ConfigLinea.Modelo_id')
+            ->join('Linea','Linea.Id','=','ConfigLinea.Linea_id')
+            ->join('CodigoPuesto','CodigoPuesto.Id','=','TrazabilidadMotorola.CodigoPuesto_id')
+            ->groupBy('Modelo.Nombre')
+            ->get();
+
+        return Response::make($TrazabilidadByLine);
     }
 }

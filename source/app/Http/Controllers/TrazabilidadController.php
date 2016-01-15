@@ -3,14 +3,14 @@
 namespace SFCSReports\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Response;
+
+use SFCSReports\CodigoPuesto;
+use SFCSReports\ConfigLinea;
 use SFCSReports\Http\Requests;
-use SFCSReports\Linea;
-use SFCSReports\Planta;
+use SFCSReports\Http\Controllers\Controller;
+use SFCSReports\Trazabilidad;
 
-
-class LineaController extends Controller
+class TrazabilidadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -88,16 +88,5 @@ class LineaController extends Controller
         //
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function dropdownByPlanta($id)
-    {
-        $lineas = Linea::where(
-            ['Planta_id' => $id]
-        )->get();
 
-        return Response::make($lineas);
-    }
 }

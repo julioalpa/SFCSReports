@@ -16,7 +16,7 @@ class MonitoresController extends Controller
      */
     public function index()
     {
-        return view('pages.monitor');
+        return view('pages.monitor.index');
     }
 
     /**
@@ -37,9 +37,18 @@ class MonitoresController extends Controller
      */
     public function store(Request $request)
     {
-        $config = 'test';
+        $this->validate($request, [
+            'lineaVistaIzquierda' => 'required',
+            'lineaVistaDerecha' => 'required',
+            'plantaVistaIzquierda' => 'required',
+            'plantaVistaDerecha' => 'required',
+            'targetVistaIzquierda' => 'required',
+            'targetVistaDerecha' => 'required'
+        ]);
 
-        return view('pages.monitor', ['config' => $config]);
+        //dd($request);
+
+        return view('pages.monitor.index', ['config' => $request]);
     }
 
     /**

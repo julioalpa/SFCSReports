@@ -67,3 +67,13 @@ Route::get('linea/dropdown/{id}', [
     'uses' => 'LineaController@dropdownByPlanta',
     'as' => 'dropTest'
 ]);
+
+Route::get('trazabilidad/production/{date}/{id}', [
+    'uses' => 'TrazabilidadController@getProductionByLine',
+    'as' => 'getProductionByLine'
+]);
+
+Route::get('trazabilidadMotorola/production/{date}/{id}', [
+    'uses' => 'TrazabilidadMotorolaController@getProductionByLine',
+    'as' => 'getMotorolaProductionByLine'
+]);

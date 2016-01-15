@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Planta extends Model
 {
     /**
-     * @var string | Dato de conexión
+     * @var string | Dato de conexiï¿½n
      */
     protected $connection = 'sfc';
 
@@ -19,7 +19,7 @@ class Planta extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany | Lineas vinculadas con la planta
      */
-    public function Linea()
+    public function linea()
     {
         return $this->hasMany('SFCSReports\Linea','Planta_id');
     }

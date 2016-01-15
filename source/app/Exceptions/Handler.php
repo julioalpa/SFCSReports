@@ -42,6 +42,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        //return redirect('/');
+
+        if ($e->getStatusCode() == 503) {
+            return response()->view('errors.503', [], 503);
+        }
+
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
