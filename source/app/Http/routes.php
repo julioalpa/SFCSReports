@@ -68,12 +68,22 @@ Route::get('linea/dropdown/{id}', [
     'as' => 'dropTest'
 ]);
 
-Route::get('trazabilidad/production/{date}/{id}', [
+Route::get('trazabilidad/production/line/{date}/{id}', [
     'uses' => 'TrazabilidadController@getProductionByLine',
     'as' => 'getProductionByLine'
 ]);
 
-Route::get('trazabilidadMotorola/production/{date}/{id}', [
+Route::get('trazabilidad/production/plant/{date}/{id}', [
+    'uses' => 'TrazabilidadController@getProductionByPlant',
+    'as' => 'getProductionByPlant'
+]);
+
+Route::get('trazabilidadMotorola/production/line/{date}/{id}', [
     'uses' => 'TrazabilidadMotorolaController@getProductionByLine',
     'as' => 'getMotorolaProductionByLine'
+]);
+
+Route::get('trazabilidadMotorola/production/plant/{date}/{id}', [
+    'uses' => 'TrazabilidadMotorolaController@getProductionByPlant',
+    'as' => 'getMotorolaProductionByPlant'
 ]);
